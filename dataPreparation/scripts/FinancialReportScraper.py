@@ -19,7 +19,7 @@ class FinancialReportScraper():
             "raporty-finansowe-przeplywy-pieniezne/",
         ]
 
-    ROW_TO_OMIT = [
+    ROW_TO_OMIT = [ #Its data for premium users
         "Data publikacji", 
         "EBITDA", 
         "Wartość firmy", 
@@ -31,7 +31,6 @@ class FinancialReportScraper():
 
     
     def __init__(self) -> None:
-        self.__path = "../database/reports/"
         self.__resetTable()
 
     def __getURLPage(self, sub_url: str, ticker: str, type: ReportType) -> BeautifulSoup:
@@ -121,8 +120,11 @@ class FinancialReportScraper():
     
     def parse(self, 
               ticker: str, 
-              save: bool = True, 
-              report_type: ReportType = ReportType.R):
+              report_type: ReportType = ReportType.R,
+              save: bool = True,
+              save_path : str = "../database/reports/", 
+              ):
+        self.setSavePath(save_path)
         self.__resetTable()
         
         for sub_url in self.SUB_URL:
