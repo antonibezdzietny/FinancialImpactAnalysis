@@ -59,6 +59,9 @@ class DateFinanceReportDB():
         with open(database_path, 'wb') as f:
             pickle.dump(self._finance_report_db, f)
 
+    def getDict(self) -> dict:
+        return self._finance_report_db
+
 
 
             
