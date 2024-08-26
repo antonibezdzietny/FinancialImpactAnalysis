@@ -37,7 +37,10 @@ class FinancialReportScraper():
         return f"{self.MAIN_URL}{sub_url}{ticker},{type.value[0]}"
     
     def __getPage(self, url: str) -> BeautifulSoup:
-        request = requests.get(url)
+        request = requests.get(url, allow_redirects=False)
+        if request.status_code == 301:
+            s_url = f"{self.MAIN_URL}{request.headers['Location']},{url[-1]}"
+            request = requests.get(s_url)
         html_code = BeautifulSoup(request.content, 'html.parser')
         return html_code
     
