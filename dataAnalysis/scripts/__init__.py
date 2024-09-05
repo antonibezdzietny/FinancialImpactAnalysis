@@ -1,3 +1,2 @@
-from .utils import *
-from .tests_classifier import *
-from .vision_utils import *
+from .utils import castDatabaseToQuasiLog
+from .utils import CompanyReturn, IndexReturn
