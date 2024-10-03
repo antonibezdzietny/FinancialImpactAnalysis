@@ -87,6 +87,11 @@ class StockPriceScraper(ABC):
         return self.__getNHistoricalPrice(date, offset, period, 
                                    StockPriceScraper._PeriodType.BEFORE)
 
+    def getHistoricalPrice(self, ticker: str) -> pd.DataFrame:
+        self.__setTicker(ticker)
+        self.__loadHistoricalPrice() 
+        return self._historical_price
+
     def loadDatabase(self, tickers: list[str]) -> None:
         for ticker in tickers:
             self.__setTicker(ticker)
